@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import AdminForm from "@/components/AdminForm";
-import GuideCard from "@/components/GuideCard";
+import AdminGuideCard from "@/components/AdminGuideCard";
 import { getEntries } from "@/lib/storage";
 import { GuideEntry } from "@/lib/types";
 import { Button } from "@/components/ui/button";
