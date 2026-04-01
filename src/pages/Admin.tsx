@@ -34,7 +34,7 @@ const Admin = () => {
           <h2 className="mb-4 text-lg font-semibold text-foreground">All Entries ({entries.length})</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {entries.map((entry, i) => (
-              <GuideCard key={entry.id} entry={entry} index={i} />
+              <AdminGuideCard key={entry.id} entry={entry} index={i} onChanged={refresh} />
             ))}
           </div>
         </div>
