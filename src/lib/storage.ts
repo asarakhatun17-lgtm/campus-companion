@@ -67,13 +67,3 @@ export function deleteEntry(id: string): void {
   const entries = getEntries().filter((e) => e.id !== id);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
 }
-  const entries = getEntries();
-  const newEntry: GuideEntry = {
-    ...entry,
-    id: crypto.randomUUID(),
-    createdAt: new Date().toISOString(),
-  };
-  entries.unshift(newEntry);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-  return newEntry;
-}
