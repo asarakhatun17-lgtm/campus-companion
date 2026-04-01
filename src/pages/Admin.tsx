@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import AdminForm from "@/components/AdminForm";
-import GuideCard from "@/components/GuideCard";
+import AdminGuideCard from "@/components/AdminGuideCard";
 import { getEntries } from "@/lib/storage";
 import { GuideEntry } from "@/lib/types";
 import { Button } from "@/components/ui/button";
@@ -34,7 +34,7 @@ const Admin = () => {
           <h2 className="mb-4 text-lg font-semibold text-foreground">All Entries ({entries.length})</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {entries.map((entry, i) => (
-              <GuideCard key={entry.id} entry={entry} index={i} />
+              <AdminGuideCard key={entry.id} entry={entry} index={i} onChanged={refresh} />
             ))}
           </div>
         </div>
