@@ -53,3 +53,27 @@ export function addEntry(entry: Omit<GuideEntry, "id" | "createdAt">): GuideEntr
   localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
   return newEntry;
 }
+
+export function updateEntry(id: string, data: Omit<GuideEntry, "id" | "createdAt">): void {
+  const entries = getEntries();
+  const idx = entries.findIndex((e) => e.id === id);
+  if (idx !== -1) {
+    entries[idx] = { ...entries[idx], ...data };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  }
+}
+
+export function deleteEntry(id: string): void {
+  const entries = getEntries().filter((e) => e.id !== id);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+}
+  const entries = getEntries();
+  const newEntry: GuideEntry = {
+    ...entry,
+    id: crypto.randomUUID(),
+    createdAt: new Date().toISOString(),
+  };
+  entries.unshift(newEntry);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  return newEntry;
+}
