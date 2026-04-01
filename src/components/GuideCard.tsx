@@ -24,26 +24,31 @@ const GuideCard = ({ entry, index }: Props) => {
 
   return (
     <Card
-      className="group border-border/60 bg-card transition-all duration-300 hover:-translate-y-1 animate-fade-in-up"
-      style={{ animationDelay: `${index * 80}ms`, boxShadow: "var(--card-shadow)" }}
-      onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "var(--card-shadow-hover)")}
-      onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "var(--card-shadow)")}
+      className="guide-card group relative flex h-full flex-col overflow-hidden border-border/70 bg-gradient-to-br from-card via-card to-accent/10 transition-all duration-300 ease-out hover:-translate-y-2 hover:border-primary/20 animate-fade-in-up"
+      style={{ animationDelay: `${index * 80}ms` }}
     >
-      <CardHeader className="pb-2">
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <div className="rounded-lg bg-primary/10 p-2 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-              <Icon className="h-4 w-4" />
-            </div>
-            <CardTitle className="text-base leading-tight">{entry.title}</CardTitle>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+
+      <CardHeader className="pb-3">
+        <div className="flex items-start gap-3">
+          <div className="mt-0.5 rounded-2xl border border-primary/15 bg-primary/10 p-2.5 text-primary transition-all duration-300 group-hover:scale-105 group-hover:bg-primary group-hover:text-primary-foreground">
+            <Icon className="h-4 w-4" />
+          </div>
+
+          <div className="space-y-2">
+            <CardTitle className="text-lg leading-snug transition-colors duration-300 group-hover:text-primary">
+              {entry.title}
+            </CardTitle>
+            <Badge variant="secondary" className="w-fit rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em]">
+              {entry.category}
+            </Badge>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-3">
-        <p className="text-sm text-muted-foreground leading-relaxed">{entry.description}</p>
-        <Badge variant="secondary" className="text-xs font-medium">
-          {entry.category}
-        </Badge>
+
+      <CardContent className="pt-0">
+        <p className="text-sm leading-relaxed text-muted-foreground">{entry.description}</p>
       </CardContent>
     </Card>
   );
