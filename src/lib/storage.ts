@@ -1,6 +1,7 @@
 import { GuideEntry } from "./types";
 
-const STORAGE_KEY = "campus-guide-entries-v2";
+const STORAGE_KEY = "campus-guide-entries-v3";
+const LEGACY_KEY = "campus-guide-entries-v2";
 
 const now = () => new Date().toISOString();
 
@@ -173,8 +174,20 @@ const defaultEntries: GuideEntry[] = [
 export function getEntries(): GuideEntry[] {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (!stored) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultEntries));
-    return defaultEntries;
+    const legacy = localStorage.getItem(LEGACY_KEY);
+    let entries = defaultEntries;
+    if (legacy) {
+      try {
+        const parsed = JSON.parse(legacy) as GuideEntry[];
+        const existingTitles = new Set(parsed.map((e) => e.title));
+        const missing = defaultEntries.filter((e) => !existingTitles.has(e.title));
+        entries = [...parsed, ...missing];
+      } catch {
+        // fall back to defaults
+      }
+    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    return entries;
   }
   try {
     return JSON.parse(stored) as GuideEntry[];
