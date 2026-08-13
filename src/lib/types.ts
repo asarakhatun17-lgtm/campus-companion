@@ -4,6 +4,10 @@ export interface GuideEntry {
   category: string;
   description: string;
   createdAt: string;
+  /** Short uppercase tag shown on the card, e.g. "LEARNING" */
+  tag?: string;
+  /** Shows a green pulsing LIVE indicator on the card */
+  live?: boolean;
 }
 
 export const CATEGORIES = [
@@ -15,4 +19,6 @@ export const CATEGORIES = [
   "Events",
   "Food & Canteen",
   "Transport",
+  "Map",
+  "Health",
 ] as const;

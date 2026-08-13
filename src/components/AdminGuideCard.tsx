@@ -13,13 +13,9 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { BookOpen, Map, Users, GraduationCap, Building, CalendarDays, UtensilsCrossed, Bus, Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
+import { getEntryIcon } from "@/lib/categoryIcons";
 import { toast } from "sonner";
-
-const categoryIcons: Record<string, React.ElementType> = {
-  "Campus Map": Map, Clubs: Users, Syllabus: GraduationCap, "Hostel Life": Building,
-  Library: BookOpen, Events: CalendarDays, "Food & Canteen": UtensilsCrossed, Transport: Bus,
-};
 
 interface Props {
   entry: GuideEntry;
@@ -28,7 +24,7 @@ interface Props {
 }
 
 const AdminGuideCard = ({ entry, index, onChanged }: Props) => {
-  const Icon = categoryIcons[entry.category] || BookOpen;
+  const Icon = getEntryIcon(entry.title, entry.category);
   const [editOpen, setEditOpen] = useState(false);
   const [title, setTitle] = useState(entry.title);
   const [category, setCategory] = useState(entry.category);
@@ -65,7 +61,7 @@ const AdminGuideCard = ({ entry, index, onChanged }: Props) => {
             <div className="flex-1 space-y-2">
               <CardTitle className="text-base leading-snug">{entry.title}</CardTitle>
               <Badge variant="secondary" className="rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em]">
-                {entry.category}
+                {entry.tag || entry.category}
               </Badge>
             </div>
             <div className="flex gap-1">

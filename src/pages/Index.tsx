@@ -31,7 +31,7 @@ const Index = () => {
             <GraduationCap className="h-4 w-4" /> Welcome, Fresher!
           </div>
           <h1 className="text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl md:text-5xl">
-            Campus Guide
+            Astra University Campus Guide
           </h1>
           <p className="mx-auto mt-3 max-w-lg text-primary-foreground/80 text-sm sm:text-base">
             Everything you need to know about your new college – from clubs and maps to syllabus tips, curated by seniors.

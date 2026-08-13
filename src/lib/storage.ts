@@ -1,35 +1,136 @@
 import { GuideEntry } from "./types";
 
-const STORAGE_KEY = "campus-guide-entries";
+const STORAGE_KEY = "campus-guide-entries-v2";
+
+const now = () => new Date().toISOString();
 
 const defaultEntries: GuideEntry[] = [
   {
     id: "1",
     title: "Main Library – 24/7 Access",
     category: "Library",
-    description: "The central library offers round-the-clock access during exam season. Bring your student ID for entry after 10 PM. Floor 3 has the quiet study zone.",
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: "2",
-    title: "Join the Coding Club",
-    category: "Clubs",
-    description: "Weekly meetups every Wednesday at 5 PM in Room 204, CS Block. Open to all years. Hackathons, workshops, and mentorship programs available.",
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: "3",
-    title: "Campus Shuttle Schedule",
-    category: "Transport",
-    description: "Shuttles run every 30 minutes from the main gate to hostels between 7 AM and 10 PM. Weekend service is hourly. Check the notice board for route changes.",
-    createdAt: new Date().toISOString(),
+    tag: "LIBRARY",
+    description:
+      "The central library offers round-the-clock access during exam season. Bring your student ID for entry after 10 PM. Floor 3 has the quiet study zone.",
+    createdAt: now(),
   },
   {
     id: "4",
     title: "First Semester Syllabus",
     category: "Syllabus",
-    description: "Download your department-specific syllabus from the university portal. Key subjects include Mathematics, English Communication, and your core department intro course.",
-    createdAt: new Date().toISOString(),
+    tag: "SYLLABUS",
+    description:
+      "Download your department-specific syllabus from the university portal. Key subjects include Mathematics, English Communication, and your core department intro course.",
+    createdAt: now(),
+  },
+  {
+    id: "5",
+    title: "PYQ & Resource Hub",
+    category: "Syllabus",
+    tag: "LEARNING",
+    description:
+      "Question Paper PDFs and Study Notes: Access a central repository for previous year question papers and collaborative study notes, curated by seniors.",
+    createdAt: now(),
+  },
+  {
+    id: "2",
+    title: "Join the Coding Club",
+    category: "Clubs",
+    tag: "CLUBS",
+    description:
+      "Weekly meetups every Wednesday at 5 PM in Room 204, CS Block. Open to all years. Hackathons, workshops, and mentorship programs available.",
+    createdAt: now(),
+  },
+  {
+    id: "6",
+    title: "Interactive Event Calendar",
+    category: "Events",
+    tag: "EVENTS/CLUBS",
+    description:
+      "Upcoming Hackathons, Sports Meets, and Cultural Fests: View and subscribe to campus events. Features RSVP, reminder setting, and club-specific notifications.",
+    createdAt: now(),
+  },
+  {
+    id: "7",
+    title: "Senior Connect Directory",
+    category: "Clubs",
+    tag: "MENTORSHIP",
+    description:
+      "Searchable Senior Network: Connect with seniors for guidance, mentorship, and project collaboration. Direct messaging and profile search.",
+    createdAt: now(),
+  },
+  {
+    id: "8",
+    title: "Skill-Exchange Forum",
+    category: "Clubs",
+    tag: "TECH/PEER-LEARNING",
+    description:
+      "Collaborative Peer-to-Peer Debugging and Mentorship: A forum to post technical doubts, logic-building challenges (e.g. Python/C++ code debugging), and get direct help from senior mentors.",
+    createdAt: now(),
+  },
+  {
+    id: "9",
+    title: "Career & Placement Hub",
+    category: "Syllabus",
+    tag: "CAREERS",
+    description:
+      "Interview Experiences and Company Profiles: Preparation guides, direct logs of previous year interview experiences, and company-specific resources to help with placements and internships.",
+    createdAt: now(),
+  },
+  {
+    id: "3",
+    title: "Campus Shuttle Schedule",
+    category: "Transport",
+    tag: "TRANSPORT",
+    description:
+      "Shuttles run every 30 minutes from the main gate to hostels between 7 AM and 10 PM. Weekend service is hourly. Check the notice board for route changes.",
+    createdAt: now(),
+  },
+  {
+    id: "10",
+    title: "Food & Canteen",
+    category: "Food & Canteen",
+    tag: "LOGISTICS/FOOD",
+    description:
+      "Where and when to eat on campus: the main canteen (7 AM–9 PM), the night cafe near Hostel B, and department kiosks. Card and UPI payments accepted everywhere.",
+    createdAt: now(),
+  },
+  {
+    id: "11",
+    title: "Live Canteen Menu",
+    category: "Food & Canteen",
+    tag: "LIVE MENU",
+    live: true,
+    description:
+      "Real-Time Tracking and Token Pre-Booking: Check daily food menu items and their availability. Features pre-booking to save time and avoid long queues.",
+    createdAt: now(),
+  },
+  {
+    id: "12",
+    title: "Campus Thrift Store",
+    category: "Hostel Life",
+    tag: "PRACTICAL/LOGISTICS",
+    description:
+      "Student Buy & Sell Marketplace: Peer-to-peer forum for buying and selling old books, tech, and other items.",
+    createdAt: now(),
+  },
+  {
+    id: "13",
+    title: "Lost & Found Board",
+    category: "Hostel Life",
+    tag: "PRACTICAL",
+    description:
+      "Peer-to-Peer Posting Board: Quickly post and search for lost or found items across campus. Simple, direct interface.",
+    createdAt: now(),
+  },
+  {
+    id: "14",
+    title: "Campus Health Centre",
+    category: "Health",
+    tag: "HEALTH",
+    description:
+      "The health centre near the sports complex is open 8 AM–8 PM, with a 24/7 emergency line. Free basic consultation and first aid for all students with a valid ID.",
+    createdAt: now(),
   },
 ];
 
@@ -39,7 +140,11 @@ export function getEntries(): GuideEntry[] {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultEntries));
     return defaultEntries;
   }
-  return JSON.parse(stored);
+  try {
+    return JSON.parse(stored) as GuideEntry[];
+  } catch {
+    return defaultEntries;
+  }
 }
 
 export function addEntry(entry: Omit<GuideEntry, "id" | "createdAt">): GuideEntry {
@@ -54,7 +159,7 @@ export function addEntry(entry: Omit<GuideEntry, "id" | "createdAt">): GuideEntr
   return newEntry;
 }
 
-export function updateEntry(id: string, data: Omit<GuideEntry, "id" | "createdAt">): void {
+export function updateEntry(id: string, data: Partial<Omit<GuideEntry, "id" | "createdAt">>): void {
   const entries = getEntries();
   const idx = entries.findIndex((e) => e.id === id);
   if (idx !== -1) {
