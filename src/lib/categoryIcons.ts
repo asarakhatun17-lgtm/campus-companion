@@ -1,7 +1,7 @@
 import {
   BookOpen, Map, Users, GraduationCap, Building, CalendarDays, UtensilsCrossed, Bus,
   MapPin, HeartPulse, FolderOpen, CalendarCheck, Network, Cog, Briefcase,
-  ShoppingBag, SearchCheck, Soup,
+  ShoppingBag, SearchCheck, Soup, Siren, Megaphone, MapPinned, Trophy,
 } from "lucide-react";
 
 const titleIcons: Record<string, React.ElementType> = {
@@ -13,6 +13,10 @@ const titleIcons: Record<string, React.ElementType> = {
   "Campus Thrift Store": ShoppingBag,
   "Lost & Found Board": SearchCheck,
   "Live Canteen Menu": Soup,
+  "Emergency & SOS": Siren,
+  "Official Notice Board": Megaphone,
+  "Room Finder & Micro-Navigation": MapPinned,
+  "Student Innovation Showcase": Trophy,
 };
 
 const categoryIcons: Record<string, React.ElementType> = {
@@ -26,6 +30,9 @@ const categoryIcons: Record<string, React.ElementType> = {
   Transport: Bus,
   Map: MapPin,
   Health: HeartPulse,
+  Notices: Megaphone,
+  Emergency: Siren,
+  Projects: Trophy,
 };
 
 export function getEntryIcon(title: string, category: string): React.ElementType {
