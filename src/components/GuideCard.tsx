@@ -28,7 +28,11 @@ const GuideCard = ({ entry, index }: Props) => {
   return (
     <>
       <Card
-        className="guide-card group relative flex h-full cursor-pointer flex-col overflow-hidden border-border/70 bg-gradient-to-br from-card via-card to-accent/10 transition-all duration-300 ease-out hover:-translate-y-2 hover:border-primary/20 animate-fade-in-up"
+        className={`guide-card group relative flex h-full cursor-pointer flex-col overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 hover:border-primary/20 animate-fade-in-up ${
+          entry.category === "Emergency"
+            ? "border-destructive/50 bg-gradient-to-br from-card via-card to-destructive/5"
+            : "border-border/70 bg-gradient-to-br from-card via-card to-accent/10"
+        }`}
         style={{ animationDelay: `${index * 80}ms` }}
         onClick={() => setOpen(true)}
       >

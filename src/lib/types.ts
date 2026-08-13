@@ -21,4 +21,7 @@ export const CATEGORIES = [
   "Transport",
   "Map",
   "Health",
+  "Notices",
+  "Emergency",
+  "Projects",
 ] as const;

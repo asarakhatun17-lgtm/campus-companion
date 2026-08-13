@@ -132,6 +132,42 @@ const defaultEntries: GuideEntry[] = [
       "The health centre near the sports complex is open 8 AM–8 PM, with a 24/7 emergency line. Free basic consultation and first aid for all students with a valid ID.",
     createdAt: now(),
   },
+  {
+    id: "15",
+    title: "Emergency & SOS",
+    category: "Emergency",
+    tag: "EMERGENCY",
+    description:
+      "Quick tap-to-call buttons for Campus Security, Anti-Ragging Helpline, and 24/7 Medical Emergency. Stay safe!",
+    createdAt: now(),
+  },
+  {
+    id: "16",
+    title: "Official Notice Board",
+    category: "Notices",
+    tag: "NOTICES",
+    description:
+      "Live updates and deadlines. Check the latest official college announcements, exam form deadlines, and fee submission dates.",
+    createdAt: now(),
+  },
+  {
+    id: "17",
+    title: "Room Finder & Micro-Navigation",
+    category: "Map",
+    tag: "MAP/NAVIGATION",
+    description:
+      "Never get lost. Search for specific classrooms (e.g., 'CS Lab 3' or 'Room 204') to get exact block and floor details instantly.",
+    createdAt: now(),
+  },
+  {
+    id: "18",
+    title: "Student Innovation Showcase",
+    category: "Projects",
+    tag: "PROJECTS",
+    description:
+      "Explore campus talent. A gallery section where students can link their tech projects, hackathon prototypes, GitHub repos, and research papers.",
+    createdAt: now(),
+  },
 ];
 
 export function getEntries(): GuideEntry[] {
